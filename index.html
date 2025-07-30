@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>زرار بودكاست 🎙️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: url("https://i.postimg.cc/GtbBXdP1/images-25.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00ffcc;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00ffcc;
+      color: #000;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .response {
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      color: #aaffee;
+      min-height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1 id="question">🎙️ بودكاست الزرار – الحلقة الأولى</h1>
+    <div>
+      <button onclick="answer('yes')">أكيد أنا زرار إذاعي 🎧</button>
+      <button onclick="answer('no')">لا أنا زرار ساكت 😐</button>
+    </div>
+    <div class="response" id="responseText"></div>
+  </div>
+
+  <script>
+    const questions = [
+      "لو كنت زرار بودكاست، هتتكلم عن إيه؟ 🎤",
+      "هل تعاني من خياطة مؤلمة في الماضي؟ 🧵",
+      "شايف نفسك زرار طالع على الهوا؟ 📡",
+      "لو كان فيك مايك، كنت هتغني ولا تتكلم؟ 🎶",
+      "هل فكرت تفتح قناة زرائر على اليوتيوب؟ 😂",
+      "لو اتفكيت، هترجع تتخيط ولا هتعتزل؟ 😔",
+      "هل عندك رسالة تبعتها للكباسين؟ 💊",
+      "هل الزرائر بتعمل اجتماعات سرية؟ 🤐",
+      "شايف إننا بنتكلم عن حقوق الزرائر كفاية؟ 🪙",
+      "لو قابلت سوستة في الطريق، هتقولها إيه؟ 😅"
+    ];
+
+    const yesReplies = [
+      "واضح إنك زرار مش أي كلام! 📻",
+      "أنا سامعك يا زرور، وقلبي معااااك 🎶",
+      "إعلامي من الطراز الأول 😂",
+      "خليك دايمًا صوت الزرائر الحرة 🔥",
+      "إنت زرار ليك مستقبل فني مظبوط! 🎧"
+    ];
+
+    const noReplies = [
+      "يا عم إتكلم متبقاش مكبوت! 🤐",
+      "يعني مش ناوي تفتح نفسك؟ 😢",
+      "زرار ساكت بس دمّه خفيف 😅",
+      "إحنا محتاجين صوتك يا زرار 🙃",
+      "حتى الزرائر ليهم حق يعبروا 😭"
+    ];
+
+    let currentQuestion = 0;
+
+    function answer(choice) {
+      const replyArr = choice === 'yes' ? yesReplies : noReplies;
+      const reply = replyArr[Math.floor(Math.random() * replyArr.length)];
+      document.getElementById('responseText').textContent = reply;
+
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        setTimeout(() => {
+          document.getElementById('question').textContent = `🎙️ ${questions[currentQuestion]}`;
+          document.getElementById('responseText').textContent = "";
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          document.getElementById('question').textContent = "🎉 كده خلص البودكاست... زرار مميز فعلاً 👑";
+          document.querySelector('div > button:nth-child(1)').style.display = "none";
+          document.querySelector('div > button:nth-child(2)').style.display = "none";
+          document.getElementById('responseText').textContent = "لو عايز تعيد البودكاست اضغط الزر اللي تحت 👇";
+          addRestartButton();
+        }, 2000);
+      }
+    }
+
+    function addRestartButton() {
+      const restart = document.createElement("button");
+      restart.textContent = "🎬 إعادة التسجيل مع الزرار";
+      restart.onclick = () => location.reload();
+      restart.style.marginTop = "20px";
+      document.querySelector(".box").appendChild(restart);
+    }
+  </script>
+</body>
+</html>
